@@ -55,18 +55,19 @@ class AVLTree:
             return self.root
 
         node.height = 1 + max(self.get_height(node.left), self.get_height(node.right))
-
+        
+        # Rotação simples a direita
         balance = self.get_balance(node)
         if balance > 1 and value < node.left.value:
             return self.rotate_right(node)
-
+        # Rotação simples à esquerda
         if balance < -1 and value > node.right.value:
             return self.rotate_left(node)
-
+        # Rotação dupla à esquerda depois à direita
         if balance > 1 and node.left.value < value:
             node.left = self.rotate_left(node.left)
             return self.rotate_right(node)
-
+         # Rotação dupla à direita depois à esquerda
         if balance < -1 and node.right.value > value:
             node.right = self.rotate_right(node.right)
             return self.rotate_left(node)
